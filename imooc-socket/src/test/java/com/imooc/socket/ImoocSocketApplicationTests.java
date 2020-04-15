@@ -1,4 +1,4 @@
-package com.imooc.project.socket;
+package com.imooc.socket;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.imooc.project.socket;
+package com.imooc.socket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
