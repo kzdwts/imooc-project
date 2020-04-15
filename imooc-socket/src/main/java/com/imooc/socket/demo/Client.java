@@ -1,8 +1,8 @@
 package com.imooc.socket.demo;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import jdk.internal.util.xml.impl.Input;
+
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -25,8 +25,22 @@ public class Client {
             PrintWriter pw = new PrintWriter(os);
             pw.write("用户名:wanglili;密码:123456");
             pw.flush();
+            socket.shutdownOutput();
+
+            // 接受客户端发送过来的信息
+            InputStream is = socket.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String info = null;
+            while ((info = br.readLine()) != null) {
+                System.out.println("我是客户端，服务端说：" + info);
+            }
+            socket.shutdownInput();
 
             // 关闭资源
+            br.close();
+            isr.close();
+            is.close();
             pw.close();
             os.close();
             socket.close();
