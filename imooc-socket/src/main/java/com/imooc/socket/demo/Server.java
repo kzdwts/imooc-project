@@ -20,31 +20,14 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(8888);
             // 开启accept监听客户端的连接
             System.out.println("***服务端已开启，等待客户端连接***");
-            Socket socket = serverSocket.accept();
-            // 获取客户端的输入流
-            InputStream is = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String info = null;
-            while ((info = br.readLine()) != null) {
-                System.out.println("我是服务端，客户端说：" + info);
+
+            while (true) {
+                // 开启监听
+                Socket socket = serverSocket.accept();
+                // 调用多线程服务端处理客户端的请求
+                ServerThread serverThread = new ServerThread(socket);
+                serverThread.start();
             }
-            socket.shutdownInput();
-
-            // 发送信息给客户端
-            OutputStream os = socket.getOutputStream();
-            PrintWriter pw = new PrintWriter(os);
-            pw.write("欢迎您");
-            pw.flush();
-
-            pw.close();
-            os.close();
-            // 释放资源
-            br.close();
-            isr.close();
-            is.close();
-            socket.close();
-            serverSocket.close();
 
         } catch (IOException e) {
             e.printStackTrace();

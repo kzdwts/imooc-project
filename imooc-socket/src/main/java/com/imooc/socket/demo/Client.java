@@ -1,7 +1,5 @@
 package com.imooc.socket.demo;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -23,7 +21,7 @@ public class Client {
             // 获取输出流，向服务端发送消息
             OutputStream os = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(os);
-            pw.write("用户名:wanglili;密码:123456");
+            pw.write("用户名:wanglili;密码:654321");
             pw.flush();
             socket.shutdownOutput();
 
