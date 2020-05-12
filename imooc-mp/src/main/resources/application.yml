@@ -1,6 +1,22 @@
 spring:
   datasource:
-    driver-class-name: com.jdbc.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.10.137:3306/mp?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
     password: 1024KangYong@MySQL
+
+# 日志输出
+logging:
+  level:
+    root: warn
+    com.imooc.mp.dao: trace
+  pattern:
+    console: '%p%m%n'
+
+# 持久层增强
+mybatis-plus:
+  mapper-locations:
+    - com/imooc/mp/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: id_worker
