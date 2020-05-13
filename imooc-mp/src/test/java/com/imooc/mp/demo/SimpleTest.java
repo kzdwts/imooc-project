@@ -1,4 +1,4 @@
-package com.imooc.mp;
+package com.imooc.mp.demo;
 
 import com.imooc.mp.dao.UserMapper;
 import com.imooc.mp.entity.User;
