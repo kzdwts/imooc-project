@@ -2,8 +2,11 @@ package com.imooc.mp.demo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.imooc.mp.dao.UserMapper;
 import com.imooc.mp.entity.User;
 import org.junit.Test;
@@ -243,11 +246,99 @@ public class SelectTest {
     @Test
     public void selectByWrapperMaps() {
         LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>lambdaQuery();
-        queryWrapper.gt(User::getAge, 26);
+        queryWrapper.gt(User::getAge, 20);
 
         List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
         userList.forEach(System.out::println);
     }
 
+    /**
+     * 按照直属上级分组，查询每组的平均年龄、最大年龄、最小年龄
+     * 并且只取年龄总和小于500的组
+     * select avg(age), min(age), max(age) from user
+     * group by manager_id
+     * having sum(age) < 500
+     */
+    @Test
+    public void selectByWrapperMaps2() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("AVG(age) avg_age", "MAX(age) max_age", "MIN(age) min_age");
+        queryWrapper.groupBy("manager_id").having("SUM(age) < {0}", 500);
+        List<Map<String, Object>> userList = userMapper.selectMaps(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 
+    @Test
+    public void selectByWrapperObjs() {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name").like("name", "雨");
+        List<Object> objects = userMapper.selectObjs(queryWrapper);
+        objects.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectByWrapperCount() {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>lambdaQuery();
+        queryWrapper.like(User::getName, "雨");
+        Integer count = userMapper.selectCount(queryWrapper);
+        System.out.println(count);
+    }
+
+    @Test
+    public void selectByWrapperOne() {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>lambdaQuery();
+        queryWrapper.like(User::getName, "雨");
+        queryWrapper.last("LIMIT 1");
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println(user);
+    }
+
+    @Test
+    public void seleteLambda() {
+        // 三种创建方式
+        LambdaQueryWrapper<User> queryWrapper1 = new QueryWrapper<User>().lambda();
+        LambdaQueryWrapper<User> queryWrapper2 = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<User> queryWrapper3 = Wrappers.<User>lambdaQuery();
+
+        queryWrapper2.like(User::getName, "雨");
+        List<User> userList = userMapper.selectList(queryWrapper2);
+        userList.forEach(System.out::print);
+    }
+
+    /**
+     * 姓名为王姓，并且（年龄小于40或邮箱不为空）
+     */
+    @Test
+    public void seleteLambda2() {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>lambdaQuery();
+        queryWrapper.likeRight(User::getName, "王");
+        queryWrapper.and(i -> i.lt(User::getAge, 40).or().isNotNull(User::getEmail));
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * 王姓
+     */
+    @Test
+    public void selectLambda3() {
+        List<User> userList = new LambdaQueryChainWrapper<User>(userMapper).likeRight(User::getName, "王").list();
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectPage() {
+        LambdaQueryWrapper<User> queryWrapper = new QueryWrapper<User>().lambda();
+        Page<User> page = new Page<>(1, 2);
+        IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
+        // 总记录数
+        long total = iPage.getTotal();
+        long pages = iPage.getPages();
+        System.out.println("总记录数：" + total);
+        System.out.println("总页数：" + pages);
+
+        // 数据
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
 }
