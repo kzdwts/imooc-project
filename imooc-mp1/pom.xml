@@ -5,7 +5,7 @@
 
     <!--本工程信息-->
     <groupId>com.imooc.mp</groupId>
-    <artifactId>imooc-mp</artifactId>
+    <artifactId>imooc-mp1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>imooc-mp</name>
     <description>Demo project for Spring Boot</description>

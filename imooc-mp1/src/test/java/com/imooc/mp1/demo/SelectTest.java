@@ -1,4 +1,4 @@
-package com.imooc.mp.demo;
+package com.imooc.mp1.demo;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
-import com.imooc.mp.dao.UserMapper;
-import com.imooc.mp.entity.User;
+import com.imooc.mp1.dao.UserMapper;
+import com.imooc.mp1.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

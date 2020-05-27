@@ -1,7 +1,7 @@
-package com.imooc.mp.dao;
+package com.imooc.mp1.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.imooc.mp.entity.User;
+import com.imooc.mp1.entity.User;
 
 /**
  * Created with IntelliJ IDEA.

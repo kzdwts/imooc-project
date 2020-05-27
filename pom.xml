@@ -27,7 +27,7 @@
     <!--子工程-->
     <modules>
         <module>imooc-socket</module>
-        <module>imooc-mp</module>
+        <module>imooc-mp1</module>
     </modules>
 
     <!--属性配置-->

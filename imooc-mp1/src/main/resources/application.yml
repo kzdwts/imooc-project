@@ -9,14 +9,14 @@ spring:
 logging:
   level:
     root: warn
-    com.imooc.mp.dao: trace
+    com.imooc.mp1.dao: trace
   pattern:
     console: '%p%m%n'
 
 # 持久层增强
 mybatis-plus:
   mapper-locations:
-    - com/imooc/mp/mapper/*.xml
+    - com/imooc/mp1/mapper/*.xml
   global-config:
     db-config:
       id-type: id_worker

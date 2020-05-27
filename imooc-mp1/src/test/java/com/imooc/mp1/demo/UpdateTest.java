@@ -1,7 +1,7 @@
-package com.imooc.mp.demo;
+package com.imooc.mp1.demo;
 
-import com.imooc.mp.dao.UserMapper;
-import com.imooc.mp.entity.User;
+import com.imooc.mp1.dao.UserMapper;
+import com.imooc.mp1.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

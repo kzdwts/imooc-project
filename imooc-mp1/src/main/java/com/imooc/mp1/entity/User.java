@@ -1,4 +1,4 @@
-package com.imooc.mp.entity;
+package com.imooc.mp1.entity;
 
 import lombok.Data;
 

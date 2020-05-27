@@ -1,4 +1,4 @@
-package com.imooc.mp;
+package com.imooc.mp1;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
