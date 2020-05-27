@@ -326,9 +326,13 @@ public class SelectTest {
         userList.forEach(System.out::println);
     }
 
+    /**
+     * 分页查询1
+     */
     @Test
     public void selectPage() {
         LambdaQueryWrapper<User> queryWrapper = new QueryWrapper<User>().lambda();
+        // current当前页，size每页数量
         Page<User> page = new Page<>(1, 2);
         IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
         // 总记录数
@@ -338,6 +342,21 @@ public class SelectTest {
         System.out.println("总页数：" + pages);
 
         // 数据
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * 分页查询2
+     * 查询年龄小于40的人
+     */
+    @Test
+    public void selectPage2() {
+        Page<User> page = new Page<>(1, 3);
+        IPage<User> iPage = userMapper.selectPage(page, Wrappers.<User>lambdaQuery().lt(User::getAge, 40));
+        System.out.println("总页数：" + iPage.getPages());
+        System.out.println("总记录数：" + iPage.getTotal());
+        System.out.println("当前页：" + iPage.getCurrent());
         List<User> userList = iPage.getRecords();
         userList.forEach(System.out::println);
     }
