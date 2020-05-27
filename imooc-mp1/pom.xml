@@ -7,7 +7,7 @@
     <groupId>com.imooc.mp</groupId>
     <artifactId>imooc-mp1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>imooc-mp</name>
+    <name>imooc-mp1</name>
     <description>Demo project for Spring Boot</description>
 
     <!--父工程-->
