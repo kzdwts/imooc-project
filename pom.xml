@@ -28,6 +28,7 @@
     <modules>
         <module>imooc-socket</module>
         <module>imooc-mp1</module>
+        <module>imooc-mp2</module>
     </modules>
 
     <!--属性配置-->
