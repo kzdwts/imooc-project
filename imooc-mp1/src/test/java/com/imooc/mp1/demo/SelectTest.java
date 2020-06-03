@@ -360,4 +360,27 @@ public class SelectTest {
         List<User> userList = iPage.getRecords();
         userList.forEach(System.out::println);
     }
+
+    /**
+     * 分页查询3(是否查询总页数)
+     * 年龄小于40
+     */
+    @Test
+    public void selectPage3() {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.<User>lambdaQuery();
+        queryWrapper.lt(User::getAge, 40);
+
+        /**
+         * @param current 当前页
+         * @param size 每页多少条数据
+         * @param isSearchCount 是否查询总页数
+         */
+        Page<User> page = new Page<>(1, 2, true);
+        IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
+        System.out.println("总页数：" + iPage.getTotal());
+        System.out.println("中记录数："+ iPage.getCurrent());
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+
 }
