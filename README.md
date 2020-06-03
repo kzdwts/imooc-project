@@ -10,3 +10,6 @@ MyBatis-Plus基本使用
 * 条件查询
 * 主键策略
 
+## 三、imooc-mp2
+MyBatis-Plus进阶
+
